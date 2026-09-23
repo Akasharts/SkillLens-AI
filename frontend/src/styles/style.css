@@ -15,6 +15,8 @@ body
 h1
 {
     font-family: 'inter';
+    color:white;
+    font-size:24px;
 }
 .right-section ul
 {
@@ -25,15 +27,148 @@ h1
 .right-section ul li
 {
     list-style: none;
-    
+   
+}
+.left-section h1
+{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.file-text
+{
+
+    width:25px;
+    height: 25px;
 }
 .links
 {
     font-family: 'poppins';
     text-decoration: none;
-    color:black;
+    color:white;
 }
 .links:active
 {
     color:grey;
+}
+.hero-section {
+    margin-left:20px;
+}
+.hero-section h1
+{
+    font-size:48px;
+    font-family:'inter';
+    margin-top:0;
+}
+.hero-section p
+{
+    font-family:'poppins';
+    color:white;
+    color:rgb(168, 142, 175);
+}
+.features
+{
+    display:flex;
+    gap:25px;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top:100px;
+    margin-left:20px;
+}
+.feature
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    margin-left:0;
+}
+.feature-desc
+{
+    display:flex;
+    flex-direction: column;
+    font-family: 'inter';
+}
+.CheckCirlce
+{
+    margin-top:0;
+}
+.title
+{
+    margin-top:15px;
+    color:white;
+    font-size:18px;
+}
+.desc
+{
+  margin-top:0;
+  color:rgb(158, 154, 154);
+  font-size:12px;
+}
+.analyze
+{
+    margin-top:25px;
+   
+}
+.analyze_btn
+{
+    border:none;
+    padding:20px 25px;
+    font-size:20px;
+    margin-left:20px;
+    font-family:'inter';
+    cursor:pointer;
+     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius:5px;
+    background:linear-gradient(135deg, #8B4DFF, #A855F7);
+    color:white;
+}
+.analyze_btn:hover
+{
+    border:none;
+    outline:none;
+}
+.hero-title
+{
+    border:solid 1px rgba(128, 128, 128, 0.7);
+    border-radius:10px;
+    width:300px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    margin-top:100px;
+}
+
+.sparkles
+{
+    width:25px;
+    height: 20px;
+    color:#8B4DFF;
+    
+}
+.CheckCircle
+{
+    color:rgb(207, 204, 204);
+    background-color:  #7f3bff;
+    fill:#070910;
+    border-radius:50px;
+    height:30px;
+    width:30px;
+    padding:5px 5px;
+}
+.hero-span
+{
+     background: linear-gradient(90deg, #8B4DFF, #C084FC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.Lens_text
+{
+      background: linear-gradient(90deg, #8B4DFF, #C084FC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
