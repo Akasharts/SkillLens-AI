@@ -45,12 +45,13 @@ h1
 {
     font-family: 'poppins';
     text-decoration: none;
-    color:white;
+    color:rgb(230, 225, 225);
 }
 .links:active
 {
     color:grey;
 }
+
 .hero-section {
     margin-left:20px;
 }
@@ -60,11 +61,10 @@ h1
     font-family:'inter';
     margin-top:0;
 }
-.hero-section p
+.hero-desc
 {
     font-family:'poppins';
-    color:white;
-    color:rgb(168, 142, 175);
+    color:rgb(213, 186, 220);
 }
 .features
 {
@@ -133,21 +133,22 @@ h1
 }
 .hero-title
 {
-    border:solid 1px rgba(128, 128, 128, 0.7);
+    border:solid 1px rgba(128, 128, 128, 0.507);
     border-radius:10px;
     width:300px;
     display:flex;
     align-items: center;
     justify-content: center;
-    color:white;
+    color:rgba(168, 142, 175, 0.805);
     margin-top:100px;
+    font-family: 'poppins';
 }
 
 .sparkles
 {
     width:25px;
     height: 20px;
-    color:#8B4DFF;
+    color:#8b4dffb7;
     
 }
 .CheckCircle
@@ -171,4 +172,156 @@ h1
       background: linear-gradient(90deg, #8B4DFF, #C084FC);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.user-input
+{
+    border: 2px dashed rgba(224, 191, 231, 0.992);
+    border-radius:5px;
+    width:200px;
+    height:200px;
+    display:flex;
+    gap:10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:100px 150px;
+    cursor:pointer;
+    margin-left:20px;
+    margin-top:50px;
+    text-align: center;
+}
+.uploadIcon
+{
+    color:#8B4DFF;
+    font-weight: bolder;
+    width:100px;
+    height: 100px;
+    flex-shrink: 0;
+
+}
+.input-desc
+{
+    color:white;
+    font-family: 'inter';
+    width:400px;
+    font-size:24px;
+    /* margin-left:150px; */
+}
+.message-desc
+{
+    color:white;
+    font-family: 'poppins';
+    text-align: left;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+}
+.drag-drop-text
+{
+    color:#8B4DFF;
+    font-weight: bold;
+    font-size:24px;
+}
+.upload-text
+{
+    color:rgb(170, 164, 175);
+    font-size:16px;
+    font-family: 'poppins';
+}
+.upload_btn
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border:none;
+    font-size:18px;
+    color:white;
+    background: linear-gradient(135deg, #8B4DFF, #A855F7);
+    padding:10px 10px;
+    border-radius:15px;
+    font-family: 'poppins';
+    gap:10px;
+    cursor: pointer;
+}
+.upload_arw
+{
+    width:20px;
+    height: 20px;
+}
+.analyzer-hero-section
+{
+    margin-top:20px;
+    margin-left:20px;
+}
+.analyzer-hero-section h1
+{ 
+  
+    font-weight: 500;
+    margin-bottom:0;
+}
+.analyzer-hero-desc
+{
+    font-family:'poppins';
+    color:rgb(155, 145, 157);
+    margin-top:0;
+}
+.analyzer-fileText
+{
+    padding:2px 2px;
+    background: linear-gradient(135deg, #8B4DFF, #A855F7);
+    border-radius:10px;
+    width:35px;
+    height:35px;
+    color:white;
+    margin-top:10px;
+}
+.filesize-text
+{
+    font-family:'poppins';
+    color:rgb(155, 145, 157);
+}
+.message-desc p
+{
+    margin-bottom:0;
+}
+.message
+{
+    margin-left:20px;
+    margin-top:10px;
+    padding:10px 10px;
+    border-radius:10px;
+    background-color:#101322cc;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap:10px;
+    width:450px;
+}
+.analyzer_btn
+{
+        
+    border:none;
+    padding:20px 25px;
+    font-size:20px;
+    margin-left:130px;
+    margin-top:25px;
+    font-family:'inter';
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius:5px;
+    color:white;
+}
+.analyzer_btn.disabled
+{
+     background:linear-gradient(135deg, #8b4dffa1, #a955f788);
+     cursor:not-allowed;
+}
+.analyzer_btn.active
+{
+    background:linear-gradient(135deg, #8B4DFF, #A855F7);
+    cursor:pointer;
 }
