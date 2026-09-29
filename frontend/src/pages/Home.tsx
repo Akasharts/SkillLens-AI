@@ -22,6 +22,23 @@ function Home()
             desc:"Get personalized suggestions"
         }
     ];
+    const addUser = async()=>
+    {
+        const response=await fetch('http://127.0.0.1:8000/user/',
+            {
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    name:"Akash",
+                    email:"akasharts10@gmail.com"
+                })
+            }
+        )
+        const data= await response.json();
+        console.log(data);
+    }
     return (<>
     <div className="nav">
         <motion.div className="left-section"
@@ -62,6 +79,7 @@ function Home()
         initial={{opacity:0,x:-15}}
         animate={{opacity:1,x:0}}
         transition={{duration:0.5,delay:0.5}}
+        onClick={addUser}
         >Analyze Your Resume <ArrowRight className='arrow'/></motion.button>
     </div>
     <div className="features">
