@@ -60,10 +60,13 @@ RESUME TEXT:
                 "role":"user",
                 "content":prompt
             }],
+            format="json",
             think=False
     )
     result=response["message"]["content"]
     try:
         return json.loads(result)
     except json.JSONDecodeError:
+        print("RAW RESPONSE:")
+        print(result)
         raise ValueError("Ollama returned invalid JSON")

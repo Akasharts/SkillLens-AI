@@ -187,7 +187,7 @@ h1
     padding:100px 150px;
     cursor:pointer;
     margin-left:20px;
-    margin-top:50px;
+    margin-top:30px;
     text-align: center;
 }
 .uploadIcon
@@ -275,20 +275,31 @@ h1
     width:35px;
     height:35px;
     color:white;
-    margin-top:10px;
+
+    flex-shrink: 0;
 }
 .filesize-text
 {
     font-family:'poppins';
     color:rgb(155, 145, 157);
 }
+.message-desc
+{
+    flex:1;
+    min-width: 0;
+}
 .message-desc p
 {
     margin-bottom:0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
 .message
 {
-    margin-left:20px;
+    margin-left:0;
     margin-top:10px;
     padding:10px 10px;
     border-radius:10px;
@@ -298,6 +309,12 @@ h1
     /* justify-content: center; */
     gap:10px;
     width:450px;
+}
+.message p
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .analyzer_btn
 {
@@ -316,8 +333,10 @@ h1
     width:500px;
     color:white;
     text-align: center;
+    background:linear-gradient(135deg, #8B4DFF, #A855F7);
+    cursor:pointer;
 }
-.analyzer_btn.disabled
+/* .analyzer_btn.disabled
 {
      background:linear-gradient(135deg, #8b4dffa1, #a955f788);
      cursor:not-allowed;
@@ -326,7 +345,7 @@ h1
 {
     background:linear-gradient(135deg, #8B4DFF, #A855F7);
     cursor:pointer;
-}
+} */
 .container
 {
     display:flex;
@@ -340,15 +359,15 @@ h1
 { 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background: rgba(15, 18, 30, 0.85);
     border: 1px solid rgba(139, 92, 246, 0.18);
     border-radius: 16px;
     gap:10px;
     padding:10px 10px;
      box-shadow:
-    inset 0 0 30px rgba(137, 89, 250, 0.19),
-    inset 0 0 60px rgba(59, 130, 246, 0.06);
+    inset 0 0 30px rgba(137, 89, 250, 0.305),
+    inset 0 0 60px rgba(59, 131, 246, 0.238);
 }
 .feature_title
 {
@@ -377,8 +396,11 @@ h1
     font-size:20px;
     font-family: 'poppins';
     border:1px solid rgba(255, 255, 255, 0.408);
-    padding:5px 5px;
-    width:100px;
+    padding:0 5px;
+    width:fit-content;
+    white-space: nowrap;
+    box-sizing: border-box;
+    height:40px;
     border-radius:10px;
     display: flex;
     align-items: center;
@@ -413,20 +435,24 @@ h1
     align-items: center;
     /* justify-content: center; */
     gap:10px;
+     /* min-height: 50px; */
     /* margin-left:40px; */
 
 }
 .right
 {
     display:flex;
-    gap:10px;
+    gap:15px;
     flex-direction: column;
+    margin-left:20px;
+    margin-right:20px;
 }
 .other_desc 
 {
     display:flex;
     list-style:none;
     flex-direction: column;
+    padding-left:0;
     
 }
 .other_desc li
@@ -439,15 +465,15 @@ h1
 {
     width:100px;
 }
-.other_features.strength
+.other_features.Strengths
 {
     box-shadow:
-    inset 0 0 30px rgba(89, 250, 116, 0.19),
-    inset 0 0 60px rgba(59, 246, 134, 0.06);
+    inset 0 0 30px rgba(89, 250, 116, 0.373),
+    inset 0 0 60px rgba(59, 246, 134, 0.333);
     background: rgba(15, 30, 20, 0.85);
     border: 1px solid rgba(102, 246, 92, 0.18);
 }
-.Icon.strength
+.Icon.Strengths
 {
     border: 1px solid rgba(92, 246, 136, 0.5);
     box-shadow:
@@ -455,4 +481,142 @@ h1
     inset 0 0 60px rgba(59, 246, 134, 0.06);
     background: linear-gradient(90deg, #5cf680, #3bf673);
 
+}
+.error_message
+{
+    color: #F87171;
+    font-family: 'poppins';
+    margin-bottom:0;
+}
+.grid-box
+{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:10px;
+}
+.Icon.Weakness
+{
+    border: 1px solid rgba(246, 92, 92, 0.5);
+    box-shadow:
+    inset 0 0 30px rgba(250, 97, 89, 0.19),
+    inset 0 0 60px rgba(246, 90, 59, 0.06);
+    background: linear-gradient(90deg, #f6765c, #f63b3b);
+}
+.Icon.Suggestions
+{
+    border: 1px solid rgba(236, 246, 92, 0.5);
+    box-shadow:
+    inset 0 0 30px rgba(231, 250, 89, 0.19),
+    inset 0 0 60px rgba(230, 246, 59, 0.06);
+    background: linear-gradient(90deg, #e2f65c, #d7f63b);
+}
+.other_features.Weakness
+{
+     box-shadow:
+    inset 0 0 30px rgba(250, 124, 89, 0.329),
+    inset 0 0 60px rgba(246, 93, 59, 0.289);
+    background: rgba(30, 17, 15, 0.85);
+    border: 1px solid rgba(246, 113, 92, 0.18);
+}
+.other_features.Suggestions
+{
+     box-shadow:
+    inset 0 0 30px rgba(250, 245, 89, 0.349),
+    inset 0 0 60px rgba(218, 246, 59, 0.293);
+    background: rgba(29, 30, 15, 0.85);
+    border: 1px solid rgba(246, 236, 92, 0.18);
+}
+.Score
+{
+    color:white;
+    font-family: 'inter';
+    font-size: 48px;
+    font-weight: 600;
+}
+.score_content {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+}
+.score_content small {
+    font-size: 18px;
+    margin-left: 3px;
+    color: #a1a1aa;
+    font-family: 'poppins';
+}
+.score_ring {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px rgba(139, 92, 246, 0.7),
+        0 0 25px rgba(115, 92, 246, 0.5),
+        0 0 45px rgba(37, 99, 235, 0.35);
+    background: conic-gradient(
+        #7c3aed var(--score),
+        rgba(255, 255, 255, 0.08) var(--score)
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score_ring::before {
+    content: "";
+    position: absolute;
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    background: #070910;
+}
+.atsScore
+{
+    color:white;
+    font-family: 'poppins';
+    font-weight: 600;
+    font-size:28px;
+}
+.user-input.analyzing
+{
+    border:none;
+    width:100%;
+    margin-left:0;
+    
+}
+.analyzing_content{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.user-input.analyzing p
+{
+    color:rgb(196, 194, 194);
+    font-size:18px;
+    font-family: 'poppins';
+    margin-top:0;
+}
+.user-input.analyzing h2
+{
+    color:white;
+    font-size:28px;
+    font-family: 'poppins';
+}
+.analyzing-spinner
+{
+    border:1px solid;
+    width:40px;
+    height:40px;
+    border: 4px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+    to 
+    {
+        transform:rotate(360deg);
+    }
 }

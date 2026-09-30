@@ -5,8 +5,9 @@ import { FileText , UploadCloudIcon,Upload,ArrowRight, CodeXml} from "lucide-rea
 import { FaPython,FaJava,FaGithub,FaJs,FaHtml5,FaReact,FaGitAlt, FaDocker, FaCode, FaCss3Alt, FaAngular, FaNodeJs, FaLinux } from "react-icons/fa";
 import { useRef, useState } from "react";
 import type { ChangeEvent} from "react";
+import type { IconType } from "react-icons";
 import { SiCplusplus,SiSharp, SiDjango, SiFastapi, SiFirebase, SiFlask, SiKubernetes, SiMongodb, SiMysql, SiNumpy, SiPandas, SiPostgresql, SiPytorch, SiTailwindcss, SiTensorflow, SiTypescript } from "react-icons/si";
-import { TbAlertTriangle, TbCircleCheck, TbSql } from "react-icons/tb";
+import { TbAlertTriangle, TbBulb, TbCircleCheck, TbSql, TbTargetArrow } from "react-icons/tb";
 import {handleUpload} from '../services/api.ts';
 function Analyzer() 
 {
@@ -17,9 +18,42 @@ function Analyzer()
     const[dragOver,setDragOver]=useState(false);
     const[filesize,setFilesize]=useState(0);
     const[result,setResult]=useState();
+
     const[skills,setSkills]=useState<string[]>([]);
     const[strengths,setStrengths]=useState<string[]>([]);
     const[weakness,setWeakness]=useState<string[]>([]);
+    const[suggestions,setSuggestions]=useState<string[]>([]);
+    const[skillGaps,setSkillGaps]=useState<string[]>([]);
+    const[atsScore,setAtsScore]=useState(0);
+
+    const[isanalyzed,setIsanalyzed]=useState(false);
+    const[errorMessage,setErrorMessage]=useState("");
+    const[isAnalyzing,setIsAnalyzing]=useState(false);
+    type Feature={
+        title:string,
+        desc:string[],
+        icon:IconType
+    };
+    const features:Feature[]=[{
+        title:"Strengths",
+        desc:strengths,
+        icon:TbCircleCheck
+    },{
+        title:"Weakness",
+        desc:weakness,
+        icon:TbAlertTriangle
+    },
+    {
+        title:"Suggestions",
+        desc:suggestions,
+        icon:TbBulb
+    },
+    {
+        title:"Skill Gaps",
+        desc:skillGaps,
+        icon:TbTargetArrow
+    }
+    ]
     function handleClick()
     {
         fileRef.current?.click();
@@ -39,22 +73,43 @@ function Analyzer()
         const size=(selectedFile.size/(1024*1024)).toFixed(2);
         setFilesize(parseFloat(size));
         setMessage(`Uploaded File : ${selectedFile.name}\n`);
-        try
+        
+    }
+    const analyze_resume= async()=>
+    {
+        if(!file)
         {
-            const data=await handleUpload(selectedFile);
+            setErrorMessage("Please select a File");
+            return;
+        }
+         try
+        {
+            setIsAnalyzing(true);
+            const data=await handleUpload(file);
             setResult(data);
             setSkills(data.result.skills);
             setStrengths(data.result.strengths);
             setWeakness(data.result.weaknesses);
+            setSuggestions(data.result.suggestions);
+            setSkillGaps(data.result.skill_gaps);
+            setAtsScore(data.result.ats_score);
             console.log(data);
+            if(!data.result.is_resume)
+            {
+                setErrorMessage("Please upload valid Resume File");
+                return ;
+            }
+            setIsanalyzed(true);
         }
         catch(error)
         {
             console.error(error);
         }
-        
+        finally
+        {
+            setIsAnalyzing(false);
+        }
     }
-   
     const handleDrop=(e:React.DragEvent<HTMLDivElement>)=>
     {
         e.preventDefault();
@@ -65,16 +120,7 @@ function Analyzer()
         setFile(droppedFile);
         setMessage(`Uploaded File : ${droppedFile.name}\n`);
     }
-    const handleAnalyze =()=>
-    {
-        if(!file)
-        {
-            setMessage("Please select a File");
-            return;
-        }
-
-    }
-     const SkillsIcon: Record<string, React.ElementType> = {
+    const SkillsIcon: Record<string, React.ElementType> = {
   Python: FaPython,
   Java: FaJava,
   JavaScript: FaJs,
@@ -132,13 +178,15 @@ function Analyzer()
         </ul>
         </div>
     </div>
-    <div className="container">
-        <div className="left">
+    {
+        !isanalyzed?(
+            <div className="left">
         <div className="analyzer-hero-section">
         <h1>Analyze your Resume</h1>
         <p className="analyzer-hero-desc">Get AI-powered insights into your resume in seconds.</p>
     </div>
-    <div className="user-input" 
+   
+    <div className={`user-input ${isAnalyzing?"analyzing":""}`}
     onClick={handleClick}
     onDragOver={handleDragOver}
     onDragLeave={handleDragLeave}
@@ -150,7 +198,14 @@ function Analyzer()
         hidden
         accept=".pdf,.doc,.docx"
         onChange={handleFilechange} />
-        {!file?(
+        {
+            isAnalyzing?( <div className="analyzing_content">
+                <div className="analyzing-spinner"></div>
+                <h2>Anlayzing Your Resume...</h2>
+                <p> Extracting information and generating insights</p>
+            </div>
+            ):(
+            !file?(
             <>
             <UploadCloudIcon className="uploadIcon"/>
             <p className="input-desc"><span className="drag-drop-text">Drag and Drop </span>the File<br/><span className="upload-text">or Click here to Upload the File</span></p>
@@ -167,14 +222,48 @@ function Analyzer()
             <span className="upload-text">Click here to Change the File</span>
             </>
             )
+            )
         }
+       
+         <p className="error_message">{errorMessage}</p>
     </div>
-   <button className={`analyzer_btn ${file?"active":"disabled"}`}
-   disabled={!file}
-   onClick={handleAnalyze}
+   <button className={`analyzer_btn `}
+   onClick={analyze_resume}
    >Analyze Your Resume <ArrowRight className='arrow'/></button>
    </div>
-    <div className="right">
+        ):(
+            <div className="right">
+                <div className="ATS_card">
+                <div className="ats_header">
+                    <p className="atsScore">ATS Score</p>
+                </div>
+                <div className="ats_score">
+                <motion.div className="score_ring"
+                    initial={{
+        background: `conic-gradient(
+            #7C3AED 0deg,
+            rgba(255, 255, 255, 0.08) 0deg
+        )`
+    }}
+    animate={{
+        background: `conic-gradient(
+            #7C3AED ${atsScore*3.6}deg,
+            rgba(255, 255, 255, 0.08) ${atsScore*3.6}deg
+        )`
+    }}
+    transition={{
+        duration: 1.5,
+        ease: "easeOut"
+    }}
+                style={{"--score":`${atsScore*3.6}deg`} as React.CSSProperties}
+                >
+                    <div className="score_content">
+                        <span className="Score">{atsScore}</span>
+                        <small>/100</small>
+                    </div>
+                </motion.div>
+                </div>
+                </div>
             <div className="skills">
                 <div className="title">
                 <CodeXml className="Icon"/>
@@ -194,34 +283,33 @@ function Analyzer()
             }
             </ul>
         </div>
-        <div className="other_features strength">
-            <div className="title">
-                <TbCircleCheck className="Icon strength"/>
-            <p className="feature_title">Strengths</p>
-            </div>
-            <ul className="other_desc">
-            {
-                strengths.map((st)=>
-                    <li>✦&nbsp;{st}</li>
-                )
-            }
-            </ul>
-        </div>
-        <div className="other_features">
-            <div className="title">
-                <TbAlertTriangle className="Icon"/>
-            <p className="feature_title">Weakness</p>
-            </div>
-            <ul className="other_desc">
-            {
-                weakness.map((w)=>
-                    <li>✦&nbsp;{w}</li>
-                )
-            }
-            </ul>
+        <div className="grid-box">
+        {
+            features.map((f)=>{
+                const Icon=f.icon;
+                return(
+                    <div className={`other_features ${f.title}`} key={f.title}>
+                        <div className="title">
+                            <Icon className={`Icon ${f.title}`}/>
+                            <p className="feature_title">{f.title}</p>
+                        </div>
+                        <ul className="other_desc">
+                        {
+                            f.desc.map((fd)=>(
+                                <li>✦&nbsp;{fd}</li>
+                            ))
+                        }
+                        </ul>
+                    </div>
+                );
+            })
+        }
         </div>
     </div>
-   </div>
+        )
+    }
+        
+    
  
     </>)
 }

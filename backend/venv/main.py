@@ -26,11 +26,13 @@ async def upload_file(file:UploadFile=File(...)):
         "result":result
         }
     except ValueError as e:
+        print("VALUE ERROR:", repr(e))
         raise HTTPException(
             status_code=400,
             detail=str(e)
         )
     except Exception as e:
+        print("ACTUAL ERROR:", repr(e))
         raise HTTPException(
             status_code=500,
             detail="Error while processing File"
