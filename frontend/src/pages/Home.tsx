@@ -1,9 +1,11 @@
 import '../styles/style.css'
-import { Link } from 'react-router-dom';
-import { CheckCircle,ArrowRight,Sparkles,FileText} from 'lucide-react';
+import { CheckCircle,ArrowRight,Sparkles} from 'lucide-react';
 import { motion } from 'motion/react';
+import { useNavigate } from "react-router-dom";
+import Navbar from '../components/Navbar';
 function Home()
 {
+    const navigate=useNavigate();
     type feature={
         title:string,
         desc:string
@@ -22,39 +24,9 @@ function Home()
             desc:"Get personalized suggestions"
         }
     ];
-    const addUser = async()=>
-    {
-        const response=await fetch('http://127.0.0.1:8000/user/',
-            {
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify({
-                    name:"Akash",
-                    email:"akasharts10@gmail.com"
-                })
-            }
-        )
-        const data= await response.json();
-        console.log(data);
-    }
+ 
     return (<>
-    <div className="nav">
-        <motion.div className="left-section"
-        initial={{opacity:0,y:5}}
-        animate={{opacity:1,y:0}}
-        transition={{duration:0.5}}
-        >
-            <h1><FileText className='file-text'/>Skill<span className='Lens_text'>Lens</span>&nbsp; AI </h1>
-        </motion.div>
-        <div className="right-section">
-        <ul>
-            <li><Link to='/' className='links'>Home</Link></li>
-            <li><Link to='/analyzer' className='links'>Analyze Resume</Link></li>
-        </ul>
-        </div>
-    </div>
+    <Navbar/>
     <motion.div className="hero-section">
         <p className='hero-title'><Sparkles className='sparkles'/>AI-Powered Resume Analysis</p>
         <motion.h1 
@@ -79,7 +51,7 @@ function Home()
         initial={{opacity:0,x:-15}}
         animate={{opacity:1,x:0}}
         transition={{duration:0.5,delay:0.5}}
-        onClick={addUser}
+        onClick={()=>navigate("/analyzer")}
         >Analyze Your Resume <ArrowRight className='arrow'/></motion.button>
     </div>
     <div className="features">

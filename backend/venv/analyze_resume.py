@@ -22,9 +22,18 @@ IMPORTANT:
 - Identify skill gaps based on the candidate's stated experience/skills and suitable roles.
 - Give practical and specific suggestions for improving the resume.
 - Recommend suitable job roles based only on the candidate's actual skills and experience.
+- Give concise Summary of the Resume Analysis
 - Keep the analysis concise and useful.
 - Return ONLY valid JSON.
 - Do NOT return markdown, explanations, or ```json.
+
+SKILLS RULES:
+- Include ONLY skills explicitly mentioned in the resume.
+- Do NOT infer, assume, or derive skills from projects, job titles, responsibilities, or experience.
+- Do NOT add technologies that are merely related to a mentioned skill.
+- Do NOT add synonyms or broader categories unless they are explicitly written.
+- If a skill is not explicitly mentioned in the resume, do not include it.
+- Return only concrete technical/professional skills that appear in the resume.
 
 IF THE TEXT IS NOT A RESUME:
 - Set "is_resume" to false.
@@ -48,7 +57,8 @@ JSON FORMAT:
     "weaknesses": [],
     "skill_gaps": [],
     "suggestions": [],
-    "best_roles": []
+    "best_roles": [],
+    "summary":[]
 }}
 
 RESUME TEXT:
