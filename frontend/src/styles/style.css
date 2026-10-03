@@ -126,7 +126,12 @@ h1
     background:linear-gradient(135deg, #8B4DFF, #A855F7);
     color:white;
 }
-.analyze_btn:hover
+.analyzer-btn.analyzing
+{
+    background:linear-gradient(135deg, #7845d5c2, #8c4bc9ae);
+    cursor:not-allowed;
+}
+.analyzer-btn:hover
 {
     border:none;
     outline:none;
@@ -211,7 +216,7 @@ h1
     font-size:24px;
     /* margin-left:150px; */
 }
-.message-desc
+.file-info
 {
     color:white;
     font-family: 'poppins';
@@ -287,12 +292,12 @@ h1
     font-family:'poppins';
     color:rgb(155, 145, 157);
 }
-.message-desc
+.file-details
 {
     flex:1;
     min-width: 0;
 }
-.message-desc p
+.file-details p
 {
     margin-bottom:0;
     margin: 0;
@@ -301,26 +306,25 @@ h1
     text-overflow: ellipsis;
     
 }
-.message
+.file-info
 {
     margin-left:0;
-    margin-top:10px;
+    margin-top:0;
     padding:10px 10px;
     border-radius:10px;
     background-color:#101322cc;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     gap:10px;
     width:450px;
 }
-.message p
+/* .message p
 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-.analyzer_btn
+} */
+.analyzer-btn
 {
         
     border:none;
@@ -340,16 +344,7 @@ h1
     background:linear-gradient(135deg, #8B4DFF, #A855F7);
     cursor:pointer;
 }
-/* .analyzer_btn.disabled
-{
-     background:linear-gradient(135deg, #8b4dffa1, #a955f788);
-     cursor:not-allowed;
-}
-.analyzer_btn.active
-{
-    background:linear-gradient(135deg, #8B4DFF, #A855F7);
-    cursor:pointer;
-} */
+
 .container
 {
     display:flex;
@@ -605,16 +600,16 @@ h1
 }
 .user-input.analyzing
 {
-    border:none;
-    
+    border: 2px dashed rgba(231, 178, 241, 0.992);
 }
-.analyzing_content{
+.analyzing-content{
     display:flex;
     /* justify-content: center; */
     /* margin-left:0; */
     align-items: center;
     padding-left:0;
     width:500px;
+    margin-top:0;
     flex-direction: column;
 }
 .user-input.analyzing p
@@ -628,6 +623,7 @@ h1
 {
     color:white;
     font-size:28px;
+    font-weight: 500;
     font-family: 'poppins';
 }
 .analyzing-spinner
@@ -726,13 +722,14 @@ h1
     color:rgb(235, 230, 230);
     font-family: 'inter';
     margin-bottom:2px;
+    margin-top:2px;
 }
 .result_title
 {
     font-family: 'inter';
     margin-bottom:0;
 }
-.left
+.resume-upload
 {
     display: flex;
     justify-content: flex-start;

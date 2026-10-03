@@ -56,8 +56,8 @@ function ResumeUpload({
     
     return(
     <>
-    <div className="left">
-        <div className="upload_file">
+    <div className="resume-upload">
+        <div className="upload-container">
             <div className="analyzer-hero-section">
                 <h1>Analyze your Resume</h1>
                 <p className="analyzer-hero-desc">Get AI-powered insights into your resume in seconds.</p>
@@ -75,11 +75,20 @@ function ResumeUpload({
             accept=".pdf,.doc,.docx"
             onChange={handleFilechange} />
             {isAnalyzing?( 
-            <div className="analyzing_content">
+             <>   
+            <div className="file-info">
+                <FileText className="analyzer-fileText"/>
+                <div className="file-details">
+                    <p>{message}</p>
+                    <span className="filesize-text">{filesize}MB</span>
+                </div>
+            </div>
+            <div className="analyzing-content">
                 <div className="analyzing-spinner"></div>
                 <h2>Anlayzing Your Resume...</h2>
                 <p> Extracting information <br/> and generating insights</p>
             </div>
+            </>
             ):(!file?(
             <>
             <UploadCloudIcon className="uploadIcon"/>
@@ -88,9 +97,9 @@ function ResumeUpload({
             </>
             ):(
             <>
-            <div className="message">
+            <div className="file-info">
                 <FileText className="analyzer-fileText"/>
-                <div className="message-desc">
+                <div className="file-details">
                     <p>{message}</p>
                     <span className="filesize-text">{filesize}MB</span>
                 </div>
@@ -100,7 +109,7 @@ function ResumeUpload({
             </>
             ))}
             </div>
-        <button className={`analyzer_btn `}
+        <button className={`analyzer-btn  ${isAnalyzing?"analyzing":""} `}
         onClick={onAnalyze}>{isAnalyzing?"Analyzing...":<> Analyze Your Resume <ArrowRight className='arrow'/></>}</button>
         </div>
         <div  className="image">
