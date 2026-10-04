@@ -85,7 +85,7 @@ function ResumeUpload({
             </div>
             <div className="analyzing-content">
                 <div className="analyzing-spinner"></div>
-                <h2>Anlayzing Your Resume...</h2>
+                <h2>Analayzing Your Resume...</h2>
                 <p> Extracting information <br/> and generating insights</p>
             </div>
             </>

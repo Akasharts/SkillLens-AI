@@ -57,7 +57,7 @@ function Home()
     <div className="features">
         {
             features.map((f)=>(
-                <div className="feature">
+                <div className="feature" key={f.title}>
                     <CheckCircle className='CheckCircle'/>
                     <div className="feature-desc">
                         <span className='title'>{f.title}</span>
