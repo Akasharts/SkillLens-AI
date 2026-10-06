@@ -8,6 +8,8 @@ type ResumeProps=
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
     isAnalyzing:boolean;
     errorMessage:string;
+    jobDesc:string;
+    setJobDesc:React.Dispatch<React.SetStateAction<string>>;
     onAnalyze:()=>void;
 }
 function ResumeUpload({
@@ -15,6 +17,8 @@ function ResumeUpload({
         setFile,
         isAnalyzing,
         errorMessage,
+        jobDesc,
+        setJobDesc,
         onAnalyze
     }:ResumeProps)
 {
@@ -53,7 +57,8 @@ function ResumeUpload({
         setFilesize(parseFloat(size));
         setMessage(`Uploaded File : ${droppedFile.name}\n`);
     }
-    
+
+
     return(
     <>
     <div className="resume-upload">
@@ -74,18 +79,22 @@ function ResumeUpload({
             hidden
             accept=".pdf,.doc,.docx"
             onChange={handleFilechange} />
-            {isAnalyzing?( 
-             <>   
-            <div className="file-info">
+            {
+                (isAnalyzing||file)&&(
+                   <div className="file-info">
                 <FileText className="analyzer-fileText"/>
                 <div className="file-details">
                     <p>{message}</p>
                     <span className="filesize-text">{filesize}MB</span>
                 </div>
             </div>
+                )
+            }
+            {isAnalyzing?( 
+             <>   
             <div className="analyzing-content">
                 <div className="analyzing-spinner"></div>
-                <h2>Analayzing Your Resume...</h2>
+                <h2>Analyzing Your Resume...</h2>
                 <p> Extracting information <br/> and generating insights</p>
             </div>
             </>
@@ -97,23 +106,27 @@ function ResumeUpload({
             </>
             ):(
             <>
-            <div className="file-info">
-                <FileText className="analyzer-fileText"/>
-                <div className="file-details">
-                    <p>{message}</p>
-                    <span className="filesize-text">{filesize}MB</span>
-                </div>
-            </div>
             <span className="upload-text">Click here to Change the File</span>
             <p className="error_message">{errorMessage}</p>
             </>
             ))}
+            
             </div>
+             <div className="job-desc-container">
+                    <p>Job Description <span className="optional-text">(Optional)</span></p>
+                    <textarea
+                    value={jobDesc}
+                    placeholder="Enter the Job Description ..."
+                    onChange={(e)=>setJobDesc(e.target.value)}
+                    className="job-desc"
+                    />
+                </div>
         <button className={`analyzer-btn  ${isAnalyzing?"analyzing":""} `}
         onClick={onAnalyze}>{isAnalyzing?"Analyzing...":<> Analyze Your Resume <ArrowRight className='arrow'/></>}</button>
+        
         </div>
         <div  className="image">
-            <img className="right_image" src={right_image}/>
+            <img className="right_image" src={right_image} draggable={false}/>
         </div>
    </div>
 

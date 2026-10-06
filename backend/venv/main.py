@@ -1,4 +1,4 @@
-from fastapi import FastAPI,UploadFile,File,HTTPException
+from fastapi import FastAPI,UploadFile,File,HTTPException,Form
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from text_extracter import extract_text
@@ -18,9 +18,10 @@ class User(BaseModel):
 async def root():
     return{"message":"backend is running"}
 @app.post('/upload')
-async def upload_file(file:UploadFile=File(...)):
+async def upload_file(file:UploadFile=File(...),JobDesc:str=Form("")):
     try:
         result=extract_text(file)
+        print(f"""Job Description : ${JobDesc}""")
         return {
         "message":"File recieved",
         "result":result

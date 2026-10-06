@@ -9,6 +9,7 @@ function Analyzer()
 {
     
     const[file,setFile]=useState<File|null>(null);
+    const[jobDesc,setJobDesc]=useState<string>("");
 
     const[skills,setSkills]=useState<string[]>([]);
     const[strengths,setStrengths]=useState<string[]>([]);
@@ -31,7 +32,7 @@ function Analyzer()
          try
         {
             setIsAnalyzing(true);
-            const data=await handleUpload(file);
+            const data=await handleUpload(file,jobDesc);
             console.log(data);
             if(!data.result.is_resume)
             {
@@ -68,6 +69,8 @@ function Analyzer()
             setFile={setFile}
             isAnalyzing={isAnalyzing}
             errorMessage={errorMessage}
+            jobDesc={jobDesc}
+            setJobDesc={setJobDesc}
             onAnalyze={analyze_resume}
             />
         ):(
